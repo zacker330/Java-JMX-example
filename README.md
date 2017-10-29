@@ -1,7 +1,7 @@
 
 An example of JMX
 ---
-WARNING: all example base on Java8.
+WARNING: all examples base on Java8.
 
 ## startup
 
