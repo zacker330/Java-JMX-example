@@ -1,20 +1,17 @@
 
 An example of JMX
 ---
+WARNING: all example base on Java8.
 
 ## startup
 
 use mvn to package our java code: `mvn compile package` then:
 
 ```
-java -Dcom.sun.management.jmxremote \
--Dcom.sun.management.jmxremote.port=9999 \
--Dcom.sun.management.jmxremote.local.only=false \
--Dcom.sun.management.jmxremote.authenticate=false \
--Dcom.sun.management.jmxremote.ssl=false \
--Djava.net.preferIPv4Stack=true \
--Djava.rmi.server.hostname=127.0.0.1 \
--jar ./target/jmxexample-1.0-SNAPSHOT.jar codes.showme.App 
+java \
+-jar ./target/jmxexample-1.0-SNAPSHOT.jar \
+-javaagent ./libs/jolokia-jvm-1.3.7-agent.jar=port=7777,host=localhost \
+codes.showme.App 
 ```
 
 P.S. add this parameter if your jconsole can't connect to app's jmx port: `-Djava.rmi.server.hostname=127.0.0.1`
@@ -53,4 +50,20 @@ jconsole -J-Djava.util.logging.config.file=/Users/jack/codebase/open-sources/jmx
     -Dcom.sun.management.jmxremote.password.file=jmxremote.password \
     ```
     and have to set `-Dcom.sun.management.jmxremote.authenticate=true`
+
+
+## Using third jvm agent: jolokia
+
+1. download [jolokia-jvm-agent](https://jolokia.org/download.html) to `libs`folder.
+1. run example app with jolokia-jvm-agent:
+    ```shell
+    java \
+    -javaagent:./libs/jolokia-jvm-1.3.7-agent.jar=port=7777,host=localhost \
+    -jar ./target/jmxexample-1.0-SNAPSHOT.jar \
+    codes.showme.App
+    ```
+1. read jmx mbean data in browser: http://127.0.0.1:7777/jolokia/read/java.lang:type=Memory/HeapMemoryUsage/
+   you should get reference of [Jolokia protocol](https://jolokia.org/reference/html/protocol.html)
+    ![](./docs/jolokia.jpeg)
+1. more about [jolokia jvm agent](https://jolokia.org/reference/html/agents.html#agents-jvm)
 
