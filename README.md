@@ -66,4 +66,5 @@ jconsole -J-Djava.util.logging.config.file=/Users/jack/codebase/open-sources/jmx
    you should get reference of [Jolokia protocol](https://jolokia.org/reference/html/protocol.html)
     ![](./docs/jolokia.jpeg)
 1. more about [jolokia jvm agent](https://jolokia.org/reference/html/agents.html#agents-jvm)
-
+1. fortunately, a kind someone create a dashboard named [jolokia-web](https://github.com/wwfdoink/jolokia-web) for displaying jolokia data:
+    ![](./docs/jolokia-dashboard.jpeg)
