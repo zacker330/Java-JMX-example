@@ -27,3 +27,30 @@ jconsole -J-Djava.util.logging.config.file=/Users/jack/codebase/open-sources/jmx
 ```
 
 ![](./docs/1.jpeg)
+
+
+## authorization
+### simple username/password
+1. create an access file for defining roles, like `jmxremote.access` in our example:
+    ```
+    monitorRole   readonly
+    controlRole   readwrite
+    ```
+    
+2. create a password file, like `jmxremote.password` in our example:
+
+    ```
+    ## Defining two "roles", each with its own password
+    monitorRole  derbym
+    controlRole  derby
+    ```
+    then `chmod 400  jmxremote.password` to prevent error: 
+    **Error: Password file read access must be restricted: jmxremote.password**
+    
+3. add parameter to your command line:
+    ```
+    -Dcom.sun.management.jmxremote.access.file=jmxremote.access \
+    -Dcom.sun.management.jmxremote.password.file=jmxremote.password \
+    ```
+    and have to set `-Dcom.sun.management.jmxremote.authenticate=true`
+
