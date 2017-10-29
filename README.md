@@ -3,6 +3,9 @@ An example of JMX
 ---
 
 ## startup
+
+use mvn to package our java code: `mvn compile package` then:
+
 ```
 java -Dcom.sun.management.jmxremote \
 -Dcom.sun.management.jmxremote.port=9999 \
